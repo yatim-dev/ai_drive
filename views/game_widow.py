@@ -8,7 +8,7 @@ from models.car import Car
 class GameWindow():
 
     def game(self, window, map):
-        car = pygame.sprite.GroupSingle(Car())
+        car = pygame.sprite.GroupSingle(Car(window))
         run = True
         while run:
             # Выйти по крестику

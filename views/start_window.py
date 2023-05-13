@@ -3,7 +3,7 @@ import os
 import pygame
 from pygame.locals import *
 
-from game_widow import GameWindow
+from views.game_widow import GameWindow
 
 
 class StartWindow:
@@ -20,10 +20,10 @@ class StartWindow:
         pygame.display.set_caption("ai_drive")
 
         # Load the images
-        map1 = pygame.image.load(os.path.join("../Assets", "1.png"))
-        map2 = pygame.image.load(os.path.join("../Assets", "2.png"))
-        map3 = pygame.image.load(os.path.join("../Assets", "3.png"))
-        logo = pygame.image.load(os.path.join("../Assets", "logo.png"))
+        map1 = pygame.image.load(os.path.join("Assets", "1.png"))
+        map2 = pygame.image.load(os.path.join("Assets", "2.png"))
+        map3 = pygame.image.load(os.path.join("Assets", "3.png"))
+        logo = pygame.image.load(os.path.join("Assets", "logo.png"))
 
         # Set the initial image to None
         current_map = None
@@ -57,9 +57,9 @@ class StartWindow:
         )
 
         # Load the button images
-        button_image1 = pygame.image.load(os.path.join("../Assets", "button_image1.png"))
-        button_image2 = pygame.image.load(os.path.join("../Assets", "button_image2.png"))
-        button_image3 = pygame.image.load(os.path.join("../Assets", "button_image3.png"))
+        button_image1 = pygame.image.load(os.path.join("Assets", "button_image1.png"))
+        button_image2 = pygame.image.load(os.path.join("Assets", "button_image2.png"))
+        button_image3 = pygame.image.load(os.path.join("Assets", "button_image3.png"))
 
         # Calculate the logo position
         logo_rect = logo.get_rect(center=(window_width // 2, 250))
