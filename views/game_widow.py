@@ -2,8 +2,7 @@ import sys
 
 import pygame
 
-import car
-from car import Car
+from models.car import Car
 
 
 class GameWindow():
@@ -21,16 +20,16 @@ class GameWindow():
             # отрисовка карты
             window.blit(map, (0, 0))
 
-            user_input = pygame.key.get_pressed()
-            if user_input[pygame.K_w]:
-                car.sprite.drive_state = False
-
-            if user_input[pygame.K_s]:
-                car.sprite.drive_state = True
-
+            self.user_input_handler(car)
 
             car.draw(window)
             car.update()
             pygame.display.update()
 
+    def user_input_handler(self, car):
+        user_input = pygame.key.get_pressed()
+        if user_input[pygame.K_w]:
+            car.sprite.drive_state = False
 
+        if user_input[pygame.K_s]:
+            car.sprite.drive_state = True
