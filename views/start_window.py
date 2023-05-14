@@ -3,7 +3,7 @@ import os
 import pygame
 from pygame.locals import *
 
-from views.game_widow import GameWindow
+from controllers.game_neat import GameWindow
 
 
 class StartWindow:
