@@ -13,7 +13,6 @@ class Car(pygame.sprite.Sprite):
         self.image = self.original_image
         self.screen = window
         self.rect = self.image.get_rect(center=(600, 820))
-        self.drive_state = False
         self.alive = True
         self.vel_vector = pygame.math.Vector2(0.8, 0)
         self.angle = 0
@@ -22,17 +21,17 @@ class Car(pygame.sprite.Sprite):
         self.radars = []
         self.draw_radar = DrawRadar()
 
-
     def update(self):
+        self.radars.clear()
         self.drive()
         self.rotate()
         for radar_angle in (-60, -30, 0, 30, 60):
             self.radar(radar_angle)
-        self.collision()  
+        self.collision()
+        self.data()
 
     def drive(self):
-        if self.drive_state:
-            self.rect.center += self.vel_vector
+        self.rect.center += self.vel_vector * 6
 
     def rotate(self):
         if self.direction == 1:
@@ -59,6 +58,12 @@ class Car(pygame.sprite.Sprite):
 
         self.radars.append([radar_angle, dist])
 
+    def data(self):
+        data = [0 for _ in range(5)]
+        for i, radar in enumerate(self.radars):
+            data[i] = int(radar[1])
+        return data
+
     def collision(self):
         length = 40
         collision_point_right = [int(self.rect.center[0] + math.cos(math.radians(self.angle + 18)) * length),
@@ -71,7 +76,5 @@ class Car(pygame.sprite.Sprite):
                 or self.screen.get_at(collision_point_left) == pygame.Color(2, 105, 31, 255):
             self.alive = False
 
-
         # Draw Collision Points
-        #self.draw_radar.draw_col_points(self.screen, collision_point_right, collision_point_left)
-
+        self.draw_radar.draw_col_points(self.screen, collision_point_right, collision_point_left)

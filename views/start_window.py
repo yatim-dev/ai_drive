@@ -7,7 +7,8 @@ from views.game_widow import GameWindow
 
 
 class StartWindow:
-    def __init__(self):
+    def __init__(self, config_path):
+        self.config_path = config_path
         # Initialize Pygame
         pygame.init()
 
@@ -20,7 +21,7 @@ class StartWindow:
         pygame.display.set_caption("ai_drive")
 
         # Load the images
-        map1 = pygame.image.load(os.path.join("Assets", "1.png"))
+        map1 = pygame.image.load(os.path.join("Assets", "track.png"))
         map2 = pygame.image.load(os.path.join("Assets", "2.png"))
         map3 = pygame.image.load(os.path.join("Assets", "3.png"))
         logo = pygame.image.load(os.path.join("Assets", "logo.png"))
@@ -92,9 +93,7 @@ class StartWindow:
 
             # Display the current image
             if current_map:
-                game_widow = GameWindow()
-                game_widow.game(window, current_map)
-                #window.blit(current_map, (0, 0))
+                GameWindow(window, current_map, self.config_path)
 
             # Update the display
             pygame.display.update()
