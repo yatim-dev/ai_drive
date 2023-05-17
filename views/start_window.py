@@ -7,29 +7,30 @@ from controllers.game_neat import GameWindow
 
 
 class StartWindow:
+    """Класс по отрисовке начального окна с выбором карт"""
     def __init__(self, config_path):
         self.config_path = config_path
-        # Initialize Pygame
+        # Инициализировать Pygame
         pygame.init()
 
-        # Set the window dimensions
+        # Задать размеры окна
         window_width = 1244
         window_height = 1016
 
-        # Create the window
+        # Создаем окно
         window = pygame.display.set_mode((window_width, window_height))
         pygame.display.set_caption("ai_drive")
 
-        # Load the images
-        map1 = pygame.image.load(os.path.join("Assets", "track.png"))
+        # Загрузка изображений
+        map1 = pygame.image.load(os.path.join("Assets", "1.png"))
         map2 = pygame.image.load(os.path.join("Assets", "2.png"))
         map3 = pygame.image.load(os.path.join("Assets", "3.png"))
         logo = pygame.image.load(os.path.join("Assets", "logo.png"))
 
-        # Set the initial image to None
+        # Установка исходного изображения на None
         current_map = None
 
-        # Create the buttons
+        # Создание кнопок
         button_width = 200
         button_height = 100
         button_margin = 20
@@ -57,22 +58,22 @@ class StartWindow:
             button_height,
         )
 
-        # Load the button images
+        # Загрузка картинок для кнопок
         button_image1 = pygame.image.load(os.path.join("Assets", "button_image1.png"))
         button_image2 = pygame.image.load(os.path.join("Assets", "button_image2.png"))
         button_image3 = pygame.image.load(os.path.join("Assets", "button_image3.png"))
 
-        # Calculate the logo position
+        # Высчитывание позиции logo
         logo_rect = logo.get_rect(center=(window_width // 2, 250))
 
-        # Run the game loop
+        # Запустить игровой цикл
         running = True
         while running:
             for event in pygame.event.get():
                 if event.type == QUIT:
                     running = False
                 elif event.type == MOUSEBUTTONDOWN:
-                    # Check if a button was clicked
+                    # Проверяем, была ли нажата кнопка
                     if button1_rect.collidepoint(event.pos):
                         current_map = map1
                     elif button2_rect.collidepoint(event.pos):
@@ -80,23 +81,23 @@ class StartWindow:
                     elif button3_rect.collidepoint(event.pos):
                         current_map = map3
 
-            # Clear the window with a gray background
+            # Очистить окно с серым фоном
             window.fill((200, 200, 200))
 
-            # Display the logo at the top center
+            # Отображать логотип вверху по центру
             window.blit(logo, logo_rect)
 
-            # Draw the buttons
+            # Рисуем кнопки
             window.blit(button_image1, button1_rect)
             window.blit(button_image2, button2_rect)
             window.blit(button_image3, button3_rect)
 
-            # Display the current image
+            # Если карта выбрана, то стартуем саму игру
             if current_map:
                 GameWindow(window, current_map, self.config_path)
 
-            # Update the display
+            # Обновить дисплей
             pygame.display.update()
 
-        # Quit Pygame
+        # Выйти из Pygame
         pygame.quit()
