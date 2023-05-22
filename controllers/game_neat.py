@@ -1,6 +1,10 @@
+import pickle
 import sys
 
 import pygame
+import visualize
+import graphviz
+import matplotlib.pyplot as plt
 import neat
 import views.draw_car as dc
 
@@ -52,10 +56,7 @@ class GameWindow:
         stats = neat.StatisticsReporter()
         pop.add_reporter(stats)
 
-        winner = pop.run(self.eval_genomes, 50)
-        print(winner)
-        self.visualize_neural_net(winner, config)
-        pygame.image.save(self.window, "neural_network.png")
+        pop.run(self.eval_genomes, 50)
 
     def eval_genomes(self, genomes, config):
         """Метод создания коллекций"""
