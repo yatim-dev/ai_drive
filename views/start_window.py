@@ -8,6 +8,7 @@ from controllers.game_neat import GameWindow
 
 class StartWindow:
     """Класс по отрисовке начального окна с выбором карт"""
+
     def __init__(self, config_path):
         self.config_path = config_path
         # Инициализировать Pygame
