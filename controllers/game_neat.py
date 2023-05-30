@@ -50,13 +50,13 @@ class GameWindow:
             config_path
         )
 
+        global pop
         pop = neat.Population(config)
 
         pop.add_reporter(neat.StdOutReporter(True))
-        stats = neat.StatisticsReporter()
-        pop.add_reporter(stats)
 
-        pop.run(self.eval_genomes, 50)
+
+        pop.run(self.eval_genomes, 15)
 
     def eval_genomes(self, genomes, config):
         """Метод создания коллекций"""
@@ -82,6 +82,9 @@ class GameWindow:
         # Увеличиваем fitness каждого автомобиля, если тот еще жив
         for i, car in enumerate(cars):
             ge[i].fitness += 1
+            if ge[i].fitness > 1000:
+                print(ge[i])
+                sys.exit()
             # Удаляем автомобиль, если он въехал в траву
             if not car.sprite.alive:
                 self.remove(i)
